@@ -205,7 +205,6 @@ void *hack_thread(void *arg) {
     LOGE("mprotect failed(%d)", errno);
     return NULL;
     }
- 
     unsigned char* tmp = (unsigned char*)(void*)hack_addr;
     tmp[0] = 0x20;
     tmp[1] = 0x00;
