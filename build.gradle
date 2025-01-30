@@ -1,6 +1,4 @@
-plugins {
-    id 'idea'
-}
+apply plugin: 'idea'
 
 idea.module {
     excludeDirs += file('out')
