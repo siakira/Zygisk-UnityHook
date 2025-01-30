@@ -9,8 +9,8 @@ idea.module {
 }
 
 ext {
-    min_sdk = 23
-    target_sdk = 31
+    minSdkVersion = 23
+    targetSdkVersion = 32
 
     outDir = file("$rootDir/out")
 }
