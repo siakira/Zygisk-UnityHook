@@ -8,6 +8,15 @@ idea.module {
     resourceDirs += file('scripts')
 }
 
+buildscript {
+    repositories {
+        mavenCentral()
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.4.2'
+    }
+
 ext {
     minSdkVersion = 23
     targetSdkVersion = 32
