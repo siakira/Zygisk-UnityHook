@@ -194,6 +194,27 @@ void *hack_thread(void *arg) {
     }
     auto image_game = il2cpp_assembly_get_image(assemblies[assemble_csharp_index]);
     Il2CppClass* clazz = il2cpp_class_from_name(image_game, "Namespace", "Classname");
+    auto method = il2cpp_class_get_method_from_name(clazz, "MethodName", 1);
+    auto base_addr = method->methodPointer;
+
+    unsigned long hack_addr = base_addr + 0x14;//偏移;
+ 
+    //设置属性可写
+    void* page_start = (void*)(hack_addr - hack_addr % PAGE_SIZE);
+    if (-1 == mprotect(page_start, PAGE_SIZE, PROT_READ | PROT_WRITE | PROT_EXEC)) {
+    LOGE("mprotect failed(%d)", errno);
+    return NULL;
+    }
+ 
+    unsigned char* tmp = (unsigned char*)(void*)hack_addr;
+    tmp[0] = 0x20;
+    tmp[1] = 0x00;
+    tmp[2] = 0x80;
+    tmp[3] = 0xD2;
+    tmp[4] = 0x00;
+    tmp[5] = 0x00;
+    tmp[6] = 0x5F;
+    tmp[7] = 0xD6;
 //    DobbyHook(static_cast<void *>(il2cpp_class_get_method_from_name(clazz, "MethodName",
 //                                                                    0)->methodPointer),
 //              reinterpret_cast<dobby_dummy_func_t>(replace_func),
